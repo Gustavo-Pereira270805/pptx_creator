@@ -1,0 +1,12 @@
+# Ambientes virtuais e dependências
+.venv-mcp/
+__pycache__/
+*.pyc
+
+# Segredos e configuração local (contém API keys)
+.openhands/
+
+# Artefatos de renderização/preview
+renders/
+*.pdf
+*.png
