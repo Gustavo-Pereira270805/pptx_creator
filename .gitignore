@@ -5,6 +5,8 @@ __pycache__/
 
 # Segredos e configuração local (contém API keys)
 .openhands/
+.env
+.figma-assets/
 
 # Artefatos de renderização/preview
 renders/

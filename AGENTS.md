@@ -14,9 +14,36 @@
 - **frontend-design** — princípios de design visual de alta qualidade (evitar estética genérica de IA).
 - **technical-writing** / **plain-english-content** — qualidade de texto e conteúdo.
 
+### Skills de design de apresentações importadas (`.agents/skills/`)
+| Skill | Origem (⭐) | Uso |
+|---|---|---|
+| `frontend-slides` | zarazhangrui/frontend-slides (~27k) | Apresentações HTML 16:9 com animações; converte PPTX→web |
+| `guizang-ppt-skill` | op7418/guizang-ppt-skill (~24k) | Web PPT de alto nível: estilo "revista × e-ink" e "Swiss Style" |
+| `design-taste-frontend` | leonxlnx/taste-skill (~76k) | Anti-"AI slop": direciona o design para algo não-templated |
+| `corporate` | bergside/awesome-design-skills | Estética corporativa: grids, layouts minimalistas, padrões enterprise |
+| `premium` | bergside/awesome-design-skills | Estética premium estilo Apple: espaçamento preciso, tipografia refinada |
+
+Fluxo recomendado: definir a estética com `corporate`/`premium`/`design-taste-frontend` → cores/fontes via `theme-factory` → gerar HTML de preview com `frontend-slides`/`guizang-ppt-skill` → validar por imagem → converter para `.pptx` final.
+
 ### MCPs
 - **Tavily** — MCP de pesquisa web (já conectado na sessão): `tavily_tavily_search`, `tavily_tavily_extract`, `tavily_tavily_research`, etc. Útil para levantar conteúdo/dados para a apresentação.
 - **Office-PowerPoint-MCP-Server** — MCP local de manipulação de PPTX (via venv acima).
+- **Figma MCP** — inspirações de design diretamente do Figma (arquivos, componentes, estilos).
+  - Servidor: `figma-developer-mcp` v0.13.2 (npm, instalado globalmente) — modo StreamableHTTP em `http://127.0.0.1:3333/mcp`.
+  - Iniciar: `./start_figma_mcp.sh` (background, log em `/tmp/figma-mcp.log`; aceita `FIGMA_API_KEY` env ou flag `--figma-api-key`).
+  - Cliente CLI: `python3 figma_mcp.py get --file-key <KEY> [--node-id <ID>] [--depth N] [--token figd_...]` / `images ...` / `tools`.
+  - **Auth**: Personal Access Token do Figma via header `X-Figma-Token` (por request) ou `--figma-api-key` no servidor. Sem token → `403 Invalid token`.
+  - Ferramentas: `get_figma_data` (fileKey obrigatório; nodeId/depth opcionais) e `download_figma_images` (nodes + localPath).
+  - O token NÃO deve ser commitado (fica em `.env`/variável de ambiente ou passado por request).
+  - **Limitações**: arquivos da **Comunidade** e **Figma Slides** (`/slides/`) não são acessíveis via REST API (comunidade exige OAuth; slides retorna `400 File type not supported`). Para acessá-los, o usuário deve duplicar para Rascunhos (o link muda para `/design/<key>/`).
+
+### Inspiração de design capturada (Figma)
+- **Pitch Deck template** (pyrstudio/omar.vaceem): file key `Adncq73gHMxPwOoBihEZ26`.
+  - Dados brutos: `Adncq73gHMxPwOoBihEZ26.json` (476 KB)
+  - Renders dos 11 slides: `figma-inspirations/*.png` + `contact-sheet.png`
+  - Design system: `figma-inspirations/design-system.md`
+  - Tema gerado: `figma-pitch-deck` no theme-factory (Paper White `#F2F3F2`, Navy `#0E2756`, Vibrant Blue `#2353E9`, Steel Gray `#6E7885`; Poppins Bold 700 / Regular 400).
+  - Uso: `render_pptx.sh` + build_deck.py com tema figma-pitch-deck.
 
 ### Pipeline de renderização (validação visual dos slides)
 - **LibreOffice** (`/usr/bin/soffice`) + **poppler-utils** (`pdftoppm`) instalados via apt.
