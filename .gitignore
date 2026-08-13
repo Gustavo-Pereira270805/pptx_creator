@@ -10,3 +10,6 @@ __pycache__/
 renders/
 *.pdf
 *.png
+
+# Entregáveis que devem ser versionados
+!theme-showcase.pdf
