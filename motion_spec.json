@@ -1,0 +1,129 @@
+{
+  "transitions": {
+    "1": "none",
+    "12": "push",
+    "default": "fade"
+  },
+  "morph_pairs": [["6", "7"], ["7", "8"], ["8", "9"], ["9", "10"], ["10", "11"]],
+  "slides": {
+    "1": {
+      "stagger": {
+        "shapes": ["index:4", "index:5", "index:6", "index:7", "index:9", "index:10"],
+        "effect": "fade",
+        "gap_ms": 180
+      }
+    },
+    "2": {
+      "stagger": {
+        "shapes": ["index:3", "index:4", "index:7", "index:8", "index:10", "index:12", "index:13", "index:15", "index:18", "index:19", "index:20", "index:21", "index:22", "index:23", "index:25", "index:27", "index:28"],
+        "effect": "fade",
+        "gap_ms": 120
+      }
+    },
+    "3": {
+      "stagger": {
+        "shapes": ["index:3", "index:4", "index:7", "index:8", "index:10", "index:11", "index:12", "index:21", "index:14", "index:15", "index:17", "index:18", "index:19"],
+        "effect": "fade",
+        "gap_ms": 120
+      }
+    },
+    "4": {
+      "stagger": {
+        "shapes": ["index:3", "index:4", "index:6", "index:8", "index:10", "index:12", "index:14", "index:16", "index:18", "index:20", "index:22"],
+        "effect": "fade",
+        "gap_ms": 140
+      }
+    },
+    "5": {
+      "stagger": {
+        "shapes": ["index:3", "index:4", "index:8", "index:9", "index:10", "index:13", "index:14", "index:15", "index:18", "index:19", "index:20", "index:23", "index:24", "index:25", "index:28", "index:29", "index:30", "index:33", "index:34", "index:35"],
+        "effect": "fade",
+        "gap_ms": 100
+      }
+    },
+    "6": {
+      "stagger": {
+        "shapes": ["title", "q1", "a1", "q2", "a2", "q3", "a3", "kpi_card", "kpi_number"],
+        "effect": "fade",
+        "gap_ms": 160
+      }
+    },
+    "7": {
+      "stagger": {
+        "shapes": ["title", "q1", "a1", "q2", "a2", "q3", "a3", "q4", "a4", "kpi_card", "kpi_number"],
+        "effect": "fade",
+        "gap_ms": 140
+      }
+    },
+    "8": {
+      "stagger": {
+        "shapes": ["title", "q1", "a1", "q2", "a2", "q3", "a3", "q4", "a4", "kpi_card", "kpi_number"],
+        "effect": "fade",
+        "gap_ms": 140
+      }
+    },
+    "9": {
+      "stagger": {
+        "shapes": ["title", "q1", "a1", "q2", "a2", "q3", "a3", "q4", "a4", "kpi_card", "kpi_number"],
+        "effect": "fade",
+        "gap_ms": 140
+      }
+    },
+    "10": {
+      "stagger": {
+        "shapes": ["title", "q1", "a1", "q2", "a2", "q3", "a3", "q4", "a4", "kpi_card", "kpi_number"],
+        "effect": "fade",
+        "gap_ms": 140
+      }
+    },
+    "11": {
+      "stagger": {
+        "shapes": ["title", "q1", "a1", "q2", "a2", "q3", "a3", "q4", "a4", "kpi_card", "kpi_number"],
+        "effect": "fade",
+        "gap_ms": 140
+      }
+    },
+    "12": {
+      "stagger": {
+        "shapes": ["index:3", "index:4", "index:7", "index:8", "index:9", "index:10", "index:12"],
+        "effect": "fade",
+        "gap_ms": 170
+      }
+    },
+    "13": {
+      "stagger": {
+        "shapes": ["index:3", "index:4", "index:7", "index:8", "index:9", "index:10", "index:11", "index:12", "index:13", "index:15", "index:16", "index:17", "index:18", "index:19", "index:20", "index:21", "index:22", "index:23"],
+        "effect": "fade",
+        "gap_ms": 100
+      }
+    },
+    "14": {
+      "stagger": {
+        "shapes": ["index:3", "index:4", "index:7", "index:8", "index:9", "index:10", "index:11", "index:12", "index:13", "index:14", "index:15", "index:17", "index:18", "index:19", "index:20"],
+        "effect": "fade",
+        "gap_ms": 100
+      }
+    },
+    "15": {
+      "stagger": {
+        "shapes": ["index:3", "index:4", "index:7", "index:8", "index:9", "index:10", "index:11", "index:12", "index:13", "index:15", "index:16", "index:17", "index:18", "index:19", "index:20", "index:21", "index:22", "index:23", "index:24", "index:25", "index:26"],
+        "effect": "fade",
+        "gap_ms": 90
+      }
+    },
+    "16": {
+      "stagger": {
+        "shapes": ["index:3", "index:4", "index:6", "index:9", "index:10", "index:13", "index:14", "index:15", "index:18", "index:19", "index:20", "index:23", "index:24", "index:25", "index:28", "index:29", "index:30", "index:33", "index:34", "index:35"],
+        "effect": "fade",
+        "gap_ms": 100
+      }
+    },
+    "17": {
+      "stagger": {
+        "shapes": ["index:3", "index:4", "index:7", "index:9", "index:10", "index:11", "index:13", "index:15", "index:16", "index:17", "index:20"],
+        "effect": "fade",
+        "gap_ms": 120
+      }
+    }
+  }
+}

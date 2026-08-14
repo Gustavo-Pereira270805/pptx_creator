@@ -69,6 +69,18 @@ Fluxo recomendado: definir a estética com `corporate`/`premium`/`design-taste-f
   - O MCP server de PowerPoint continua no venv: `/workspace/project/.venv-mcp/` (com python-pptx próprio).
   - Se `import pptx` falhar, reinstalar: `sudo /usr/local/bin/python3 -m pip install --target /usr/local/lib/python3.13/dist-packages python-pptx`
 
+### Auditoria visual de decks — lições aprendidas (deck SIME, ago/2026)
+- **O subagente `slide-designer` com MiMo NÃO faz visão real confiável**: confabula métricas (coordenadas impossíveis, percentuais inconsistentes entre auditorias, admite "não tenho capacidade de visão real"). Usar com ceticismo e **sempre refutar/confirmar por medição de pixel própria** (PIL/numpy).
+- **Pipeline de verificação que funcionou**:
+  1. Diff de conteúdo bidirecional por frases: fatiar cada texto do original em frases (`re.split(r'[\n➔]+')`), normalizar (NFKD, sem acentos, minúsculas, sem espaços, sem `**`), checar contém-inclui no deck novo. Chrome (slide N/17, labels) ignorado via regex.
+  2. Medição de sobreposição: faixa tint da banda ⚠️ deve ter altura ~prevista; texto da banda contido (folgas ≥0.08"); densidade escura na faixa do footer ≤2.5%; topo da barra tip/quote abaixo do fim dos cards.
+  3. Render estático do .pptx com motion deve ser **pixel-idêntico** ao base (motion nunca altera o visual parado).
+- **Armadilhas encontradas**:
+  - `meta_page()` retornava o slide mas o caller usava a variável global `s` antiga → footers empilhados no S6. Regra: após criar slide em função, capturar `s = prs.slides[-1]` antes de anexar.
+  - Imagem de rodapé desenhada por cima da banda ⚠️ (ordem z). Sempre reservar espaço vertical antes de posicionar imagem.
+  - Original tinha asteriscos literais `**SIME**` (intenção de negrito) e labels de seção ("Filtros e Visão Geral") que o redesign não deve descartar.
+  - Footer compartilhado: linha em 7.16", texto 7.23"; barras inferiores (tip/quote) terminam ≤7.12".
+
 ### Uso típico
 1. Escolher tema via theme-factory (ou criar tema customizado).
 2. Gerar conteúdo (tavily para pesquisa, se necessário).
