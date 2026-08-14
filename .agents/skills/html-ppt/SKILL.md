@@ -161,6 +161,7 @@ Chinese + English deck, and how to export.
 - [references/full-decks.md](references/full-decks.md) — all 15 full-deck templates.
 - [references/presenter-mode.md](references/presenter-mode.md) — **演讲者模式 + 逐字稿编写指南（技术分享/演讲必看）**.
 - [references/authoring-guide.md](references/authoring-guide.md) — full workflow.
+- [references/pptx-motion.md](references/pptx-motion.md) — **motion coreography for the final .pptx** (entrance animations + Morph/fade/push transitions via `scripts/pptx_motion.py`).
 
 ## File structure
 
@@ -187,9 +188,38 @@ html-ppt/
 │   └── single-page/*.html         (31 layout files with demo data)
 ├── scripts/
 │   ├── new-deck.sh                (scaffold a deck from deck.html)
-│   └── render.sh                  (headless Chrome → PNG)
+│   ├── render.sh                  (headless Chrome → PNG)
+│   └── pptx_motion.py             (inject entrance animations + transitions into a .pptx)
 └── examples/demo-deck/            (complete working deck)
 ```
+
+## PPTX motion — dynamism for the deliverable
+
+The CSS/FX animations above are HTML-only: they power the **web deck**. For the
+final **`.pptx`** (the actual artifact people open in PowerPoint), dynamism comes
+from a different layer — entrance animations + slide transitions injected into the
+slide XML. That is what `scripts/pptx_motion.py` + `references/pptx-motion.md` do.
+
+```bash
+# Apply a declarative motion spec (recommended — mirrors the design-spec)
+python3 scripts/pptx_motion.py deck.pptx --spec motion-spec.json --out deck_motion.pptx
+
+# One-off: entrance animation on a shape (by name), fade after previous +200ms
+python3 scripts/pptx_motion.py deck.pptx --entrance "Título" fade after_previous 200 --out deck_motion.pptx
+
+# One-off: transition (fade|push|wipe|morph|none) on every slide
+python3 scripts/pptx_motion.py deck.pptx --transition fade --out deck_motion.pptx
+```
+
+Effects: `appear` (presetID 1) · `fade` (presetID 10) · `zoom` (presetID 23).
+Triggers: `on_click` · `after_previous` (default) · `with_previous`.
+Shapes are matched by **name** (or `index:N`). Transitions include **Morph**
+(`mc:AlternateContent` with p14 fallback → graceful degrade to Fade).
+
+> Verified: injected timing/transition XML is pixel-neutral — LibreOffice renders
+> an animated deck **identical** to its static twin (tested at 150 DPI).
+> See `references/pptx-motion.md` for choreography rules per slide type and
+> anti-patterns (never animate everything, ≤3s per slide coreography, etc.).
 
 ## Rendering to PNG
 

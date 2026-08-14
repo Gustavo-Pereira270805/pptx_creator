@@ -33,6 +33,12 @@ Fluxo recomendado: definir a estética com `corporate`/`premium`/`design-taste-f
 - `power-design` usa Firecrawl MCP para extração de brand (caminho opcional "brand a partir de URL"); as brands prontas funcionam offline.
 - **Decisão de não incorporar**: `likaku/Mck-ppt-design-skill` (Apache-2.0, mas acoplado ao engine MckEngine + paths WorkBuddy + docs em chinês + dependência Tencent Hunyuan) e `nicobailon/visual-explainer` (~9.5k⭐, porém é focado em diagramas/plan-audits, não em design de apresentação).
 
+**Camada de motion para o `.pptx` final (complemento do html-ppt):**
+- As animações CSS/FX do html-ppt só valem para o deck **HTML/web**. O `.pptx` final ganha dinamismo via `html-ppt/scripts/pptx_motion.py` (injeção de XML `p:timing` + `p:transition`): entrance animations (`appear`/`fade`/`zoom`, triggers `on_click`/`after_previous`/`with_previous`, match por nome de shape ou `index:N`) e transições (`fade`/`push`/`wipe`/`morph`/`none` — Morph com `mc:AlternateContent` + fallback).
+- Uso: `python3 scripts/pptx_motion.py deck.pptx --spec motion-spec.json --out deck_motion.pptx` (spec declarativa, espelhando o design-spec). Guia de coreografia: `references/pptx-motion.md` (stagger 150-250ms, ≤3s por slide, 1-2 tipos de transição por deck, nunca animar tudo).
+- **Verificado**: XML de motion é neutro na renderização (LibreOffice renderiza deck animado idêntico ao estático, pixel-exato a 150 DPI).
+- **Ambiente**: python-pptx 1.0.2 + lxml instalados no python do sistema (`python3 -m pip install python-pptx`). LibreOffice/poppler instalados via apt (não estavam presentes; agora `soffice` em `/usr/bin/soffice`).
+
 ### MCPs
 - **Tavily** — MCP de pesquisa web (já conectado na sessão): `tavily_tavily_search`, `tavily_tavily_extract`, `tavily_tavily_research`, etc. Útil para levantar conteúdo/dados para a apresentação.
 - **Office-PowerPoint-MCP-Server** — MCP local de manipulação de PPTX (via venv acima).
