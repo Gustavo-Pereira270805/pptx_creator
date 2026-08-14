@@ -22,8 +22,16 @@
 | `design-taste-frontend` | leonxlnx/taste-skill (~76k) | Anti-"AI slop": direciona o design para algo não-templated |
 | `corporate` | bergside/awesome-design-skills | Estética corporativa: grids, layouts minimalistas, padrões enterprise |
 | `premium` | bergside/awesome-design-skills | Estética premium estilo Apple: espaçamento preciso, tipografia refinada |
+| `html-ppt` | lewislulu/html-ppt-skill (~8k) | **Dinamismo**: HTML PPT com 36 temas, 31 layouts, 27 animações CSS + 21 FX canvas (confetti, knowledge-graph, neural-net, typewriter...), presenter mode, render PNG. Cobre o papel de "motion-choreography". |
+| `power-design` | ItsssssJack/power-design (~600) | **Design system**: 20 regras codificadas p/ slides (whitespace ≥40%, safe-zone 5%, ≤7 chunks, WCAG, 60-30-10, 1 acento) + 72 brand systems prontos. Cobre o papel de "slide-design-system". |
 
-Fluxo recomendado: definir a estética com `corporate`/`premium`/`design-taste-frontend` → cores/fontes via `theme-factory` → gerar HTML de preview com `frontend-slides`/`guizang-ppt-skill` → validar por imagem → converter para `.pptx` final.
+Fluxo recomendado: definir a estética com `corporate`/`premium`/`design-taste-frontend` → cores/fontes via `theme-factory` → **aplicar as 20 regras do `power-design`** (design system) → gerar HTML com `frontend-slides`/`guizang-ppt-skill`/`html-ppt` (animações) → validar por imagem → converter para `.pptx` final.
+
+**Notas sobre as skills importadas (html-ppt / power-design):**
+- `html-ppt` e `power-design` são MIT; foram copiadas em `.agents/skills/` com poda de artefatos de README (GIFs/imagens de ilustração) — o conteúdo funcional está completo (assets, templates, references, scripts, brands, principles).
+- `html-ppt/scripts/render.sh` assume Chrome macOS. Neste ambiente usar Chromium headless: `chromium --headless=new --disable-gpu --no-sandbox --screenshot=out.png --window-size=1920,1080 <file.html>`.
+- `power-design` usa Firecrawl MCP para extração de brand (caminho opcional "brand a partir de URL"); as brands prontas funcionam offline.
+- **Decisão de não incorporar**: `likaku/Mck-ppt-design-skill` (Apache-2.0, mas acoplado ao engine MckEngine + paths WorkBuddy + docs em chinês + dependência Tencent Hunyuan) e `nicobailon/visual-explainer` (~9.5k⭐, porém é focado em diagramas/plan-audits, não em design de apresentação).
 
 ### MCPs
 - **Tavily** — MCP de pesquisa web (já conectado na sessão): `tavily_tavily_search`, `tavily_tavily_extract`, `tavily_tavily_research`, etc. Útil para levantar conteúdo/dados para a apresentação.
